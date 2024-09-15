@@ -1,0 +1,60 @@
+openapi: 3.0.3
+
+info:
+  title: Asobiba OpenAPI - Golang × Next
+  version: 0.1.0
+
+paths:
+  /api/sign-in:
+    post:
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sign-in-request'
+      responses:
+        '200':
+          description: 正常系
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sign-in-response'
+        '400':
+          description: パラメータの異常
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sign-in-bad-request'
+
+components:
+  schemas:
+    sign-in-request:
+      description: sign-in時のリクエストパラメータ
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    sign-in-response:
+      description: sign-in時のレスポンス
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+      required:
+        - access_token
+        - refresh_token
+    sign-in-bad-request:
+      description: sign-in時のBad Request
+      type: object
+      properties:
+        error_code:
+          type: string
