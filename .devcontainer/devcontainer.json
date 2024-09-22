@@ -1,0 +1,16 @@
+{
+  "name": "Development",
+  "dockerFile": "../docker/develop/Dockerfile",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "42Crunch.vscode-openapi",
+        "EditorConfig.EditorConfig",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "editor.formatOnSave": true
+      }
+    }
+  }
+}
