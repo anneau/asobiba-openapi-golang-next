@@ -1,12 +1,9 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/anneau/asobiba-openapi-golang-next/api/server"
 	"github.com/anneau/asobiba-openapi-golang-next/config"
 	"github.com/anneau/asobiba-openapi-golang-next/infra/database"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 )
 
 func main() {
@@ -20,16 +17,11 @@ func main() {
 
 	defer dbConn.Close()
 
-	e := echo.New()
+	server, err := server.NewServer(&config.HTTPServer, dbConn)
 
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	if err != nil {
+		panic(err)
+	}
 
-	e.GET("/health", health)
-
-	e.Logger.Fatal(e.Start(":1323"))
-}
-
-func health(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
+	server.Run()
 }
