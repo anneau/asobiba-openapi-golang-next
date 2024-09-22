@@ -2,7 +2,7 @@ FROM debian:latest
 
 ENV GOLANG_VERSION 1.23.1
 
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y wget git
 
 RUN wget https://go.dev/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz && tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz
 
